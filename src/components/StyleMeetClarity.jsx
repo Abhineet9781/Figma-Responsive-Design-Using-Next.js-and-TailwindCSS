@@ -10,10 +10,10 @@ export default function StyleMeetClarity() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const maxScroll = 400;
+      const maxScroll = 700;
       const progress = Math.min(scrollY / maxScroll, 1);
 
-      const newScale = 1 + progress;
+      const newScale = 1 + progress * 0.5;
       const newWidth = `${160 + progress * (window.innerWidth - 160)}px`;
 
       setScale(newScale);
@@ -25,8 +25,8 @@ export default function StyleMeetClarity() {
   }, []);
 
   return (
-    <div className="h-[200vh] bg-[#0a0a0e] text-white overflow-x-hidden relative">
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
+    <div className="h-[100vh] bg-[#0a0a0e] text-white overflow-x-hidden relative">
+      <div className="sticky top-0 min-h-[653px] h-auto flex flex-col items-center justify-center">
         <div className="mb-8">
           <span className="px-4 py-2 bg-gray-800 rounded-full text-sm flex items-center space-x-2">
             <span className="text-blue-400">★</span>
@@ -34,18 +34,18 @@ export default function StyleMeetClarity() {
           </span>
         </div>
 
-        <div className="flex items-center justify-center w-full gap-10">
+        <div className="flex items-center justify-center w-full gap-10 ">
           <h1 className="text-6xl font-serif">Vision</h1>
 
           <div
-            className="transition-all duration-200 ease-in-out max-w-full h-auto"
+            className="transition-all duration-700 ease-in-out max-w-[100vw] overflow-hidden"
             style={{ transform: `scale(${scale})`, width: imageWidth }}
           >
             <Image
               src="/stylemeetclarity.jpg"
               alt="Glasses"
-              width={500}
-              height={300}
+              width={1000}
+              height={600}
               className="w-full h-auto object-cover rounded-md"
             />
           </div>
