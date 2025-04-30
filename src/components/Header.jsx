@@ -1,12 +1,19 @@
 "use client"
 import { useState, useEffect } from 'react';
 import Image from 'next/image'
-import { Languages, PoundSterling, Truck } from 'lucide-react';
-
-
+import { Inter, Amiri } from 'next/font/google';
+import { BriefcaseBusiness, ChevronDown, Heart, Languages, PoundSterling, Search, Truck } from 'lucide-react';
+const inter = Inter({ subsets: ['latin'] });
+const navItems = [
+    { title: 'Eyeglasses', menu: ['Men', 'Women', 'Kids'] },
+    { title: 'Contact Lenses', menu: ['Daily', 'Monthly', 'Color Lenses'] },
+    { title: 'Brands', menu: ['RayBan', 'Oakley', 'Vinova'] },
+    { title: 'Eye Testing', menu: ['Book Test', 'Nearby Centers'] },
+    { title: 'House of Vinova', menu: ['About Us', 'Our Story'] },
+];
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
-
+   
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
@@ -16,8 +23,13 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const [active, setActive] = useState(null);
+
+    const handleToggle = (index) => {
+        setActive(active === index ? null : index);
+    };
     return (
-        <header className="sticky top-0 z-50">
+        <header className={`${inter.className} sticky top-0 z-50`}>
             {!isScrolled && (
                 <div className="bg-[#F0F6FF] text-white text-sm p-[6px] ">
                     <div className="container mx-auto flex justify-between items-center">
@@ -56,19 +68,19 @@ export default function Header() {
 
                                 </button>
                                 <div className="bg-[#1E1E1E] rounded-full flex items-center justify-center w-[25px] h-[25px]">
-  <PoundSterling size={18} color="#FFFFFF" />
-</div>
+                                    <PoundSterling size={18} color="#FFFFFF" />
+                                </div>
 
 
                             </div>
 
-                            <button className=" bg-[#F0F6FF]  rounded-full cursor-pointer border border-[#3882FF99] flex items-center ">
-                                <div className='px-3 py-2 flex items-center space-x-2'>
+                            <div className=" bg-[#F0F6FF]  rounded-full cursor-pointer border border-[#3882FF99] flex items-center ">
+                                <button className='px-3 py-2 flex items-center space-x-2 cursor-pointer '>
                                     <Languages size={18} color='#3882FF' />
-                                    <p className='text-[#3882FF]   text-sm font-normal cursor-pointer '>Ind - Eng</p>
-                                </div>
+                                    <p className='text-[#3882FF]   text-sm font-normal  '>Ind - Eng</p>
+                                </button>
 
-                            </button>
+                            </div>
 
                         </div>
                     </div>
@@ -78,25 +90,66 @@ export default function Header() {
 
             )}
 
-            <div className={`bg-white shadow-md transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0' : ''}`}>
-                <div className="container mx-auto p-4">
+            <div className={`bg-[#FFFFFF05] shadow-md transition-all duration-300 ${isScrolled ? 'fixed top-0 left-0 right-0 backdrop-blur-6xl' : ''}`}>
+
+                <div className="container mx-auto">
                     <div className="flex justify-between items-center">
-                        <div className="text-2xl font-bold">VINOVA</div>
+                        <Image
+                            src="/logo.png"
+                            width={140}
+                            height={22}
+                            alt="logo"
+                            className='text-[#1E1E1E]'
+                        />
+                        <div className='flex items-center'>
+                            <nav className="flex gap-6 relative z-50">
+                                {navItems.map((item, index) => (
+                                    <div key={item.title} className="relative">
+                                        <button
+                                            className="flex items-center gap-1 text-sm font-medium focus:outline-none"
+                                            style={{ color: '#FFFFFF' }}
+                                            onClick={() => handleToggle(index)}
+                                        >
+                                            {item.title}
+                                            <ChevronDown width={18} height={18} />
+                                        </button>
 
-                        <nav className="hidden md:flex space-x-6">
-                            <a href="#" className="hover:text-blue-600">Eyeglasses</a>
-                            <a href="#" className="hover:text-blue-600">Contact Lenses</a>
-                            <a href="#" className="hover:text-blue-600">Brands</a>
-                            <a href="#" className="hover:text-blue-600">Eye Testing</a>
-                            <a href="#" className="hover:text-blue-600">House of Vinova</a>
-                        </nav>
+                                        {active === index && (
+                                            <div className="absolute top-full mt-2 bg-[#FFFFFF05] shadow-md rounded-md w-40 py-2">
+                                                {item.menu.map((menuItem) => (
+                                                    <div
+                                                        key={menuItem}
+                                                        className="px-4 py-2 text-sm text-[#FFFFFF] hover:bg-gray-500 hover:text-black whitespace-nowrap"
+                                                    >
+                                                        {menuItem}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </nav>
 
-                        <div className="flex items-center space-x-4">
-                            <button className="bg-black text-white px-4 py-2 rounded-md text-sm hidden sm:block">
-                                30 TRY ON
-                            </button>
-                            <button className="hover:text-blue-600">Sign in</button>
+                            <div className="flex items-center space-x-4 ml-8 ">
+                                <button className="bg-[#3882FF] text-[#FFFFFF]  px-4 py-2 rounded-[12px] text-sm hidden sm:block cursor-pointer">
+                                    3D TRY ON
+                                </button>
+
+                            </div>
+                            <div className="bg-[#333D49] rounded-full cursor-pointer flex items-center ml-4">
+                                <button className="px-3 py-2 flex items-center space-x-2 cursor-pointer">
+                                    <Search size={18} color="#FFFFFF" />
+                                    <Heart size={18} color="#FFFFFF" />
+                                    <BriefcaseBusiness size={18} color="#FFFFFF" />
+
+                                    <div className="w-px h-4 bg-white " />
+
+                                    <p className="text-[#FFFFFF] text-sm font-medium">Sign In</p>
+                                </button>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
