@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import Image from 'next/image'
-import { Languages, Truck } from 'lucide-react';
+import { Languages, PoundSterling, Truck } from 'lucide-react';
 
 
 export default function Header() {
@@ -55,13 +55,11 @@ export default function Header() {
                                     </div>
 
                                 </button>
-                                <Image
-                                    src="/vector.png"
-                                    width={19.5}
-                                    height={15}
-                                    alt="Picture of the author"
-                                    className='text-[#1E1E1E] w-[20px] h-[20px]'
-                                />
+                                <div className="bg-[#1E1E1E] rounded-full flex items-center justify-center w-[25px] h-[25px]">
+  <PoundSterling size={18} color="#FFFFFF" />
+</div>
+
+
                             </div>
 
                             <button className=" bg-[#F0F6FF]  rounded-full cursor-pointer border border-[#3882FF99] flex items-center ">
