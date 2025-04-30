@@ -1,5 +1,7 @@
 import Banner from "@/components/Banner";
+import ShopByBrand from "@/components/ShopByBrand";
 import ShopByCategory from "@/components/ShopByCategory";
+import UnrivalledExcellence from "@/components/UnrivalledExcellence";
 import WearTheTrend from "@/components/WearTheTrend";
 import Image from "next/image";
 
@@ -10,6 +12,8 @@ export default function Home() {
         <Banner />
         <ShopByCategory/>
         <WearTheTrend/>
+        <ShopByBrand/>
+        <UnrivalledExcellence/>
       </div>
     </>
   );
