@@ -36,17 +36,22 @@ export default function ShopByBrand() {
   };
 
   return (
-    <div className="py-12 px-4 md:px-20 bg-white">
-      <h2 className="text-[38px] font-bold text-center text-[#333A45] mb-2">Shop By Brand</h2>
-      <p className="text-center text-[#3B3F40] text-base font-normal">Choose your perfect brand from our stylish colors and patterns.</p>
+    <div className="py-10 px-4 sm:px-8 md:px-16 lg:px-20 bg-white">
+      <h2 className="text-[26px] sm:text-[32px] md:text-[38px] font-bold text-center text-[#333A45] mb-2">
+        Shop By Brand
+      </h2>
+      <p className="text-center text-[#3B3F40] text-sm sm:text-base font-normal">
+        Choose your perfect brand from our stylish colors and patterns.
+      </p>
 
-      <div className="flex items-center justify-between gap-4 mx-[77px] pt-[60px]">
+      <div className="flex items-center justify-between gap-4 mt-[40px]">
+        {/* Scrollable Brands Row */}
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto space-x-[60px] scroll-smooth"
+          className="flex overflow-x-auto space-x-[40px] sm:space-x-[50px] md:space-x-[60px] scroll-smooth px-1"
           style={{
-            scrollbarWidth: 'none', 
-            msOverflowStyle: 'none', 
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
           }}
         >
           {brands.map((brand, index) => (
@@ -62,9 +67,10 @@ export default function ShopByBrand() {
           ))}
         </div>
 
+        {/* Button */}
         <button
           onClick={scrollBrands}
-          className="bg-blue-500 text-white rounded-full px-6 py-2 flex items-center hover:bg-blue-600 transition text-nowrap"
+          className="bg-blue-500 text-white rounded-full px-6 py-2 flex-shrink-0 hover:bg-blue-600 transition text-sm sm:text-base whitespace-nowrap"
         >
           Shop all <span className="ml-2">→</span>
         </button>
@@ -72,7 +78,7 @@ export default function ShopByBrand() {
 
       <style jsx>{`
         div::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Opera*/
+          display: none;
         }
       `}</style>
     </div>

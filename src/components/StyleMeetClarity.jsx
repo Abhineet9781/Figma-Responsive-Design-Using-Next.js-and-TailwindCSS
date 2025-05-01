@@ -6,53 +6,43 @@ import Image from "next/image";
 export default function StyleMeetClarity() {
   const [scale, setScale] = useState(1);
   const [imageWidth, setImageWidth] = useState("160px");
-  const [isInView, setIsInView] = useState(false); // Track if the element is in view
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    // Create an IntersectionObserver to track when the element is in view
     const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        setIsInView(entry.isIntersecting); // Update state based on visibility
-      },
-      {
-        rootMargin: "0px", // You can adjust the margin if needed
-      }
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: "0px" }
     );
 
-    const targetElement = document.getElementById("styleMeetClaritySection");
-    if (targetElement) {
-      observer.observe(targetElement);
-    }
+    const target = document.getElementById("styleMeetClaritySection");
+    if (target) observer.observe(target);
 
     return () => {
-      if (targetElement) {
-        observer.unobserve(targetElement);
-      }
+      if (target) observer.unobserve(target);
     };
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isInView) { 
-        const scrollY = window.scrollY;
-        const maxScroll = 700;
-        const progress = Math.min(scrollY / maxScroll, 1);
+      if (!isInView) return;
 
-        const newScale = 1 + progress * 0.5;
-        const newWidth = `${160 + progress * (window.innerWidth - 160)}px`;
+      const scrollY = window.scrollY;
+      const maxScroll = 700;
+      const progress = Math.min(scrollY / maxScroll, 1);
 
-        setScale(newScale);
-        setImageWidth(newWidth);
-      }
+      setScale(1 + progress * 0.5);
+      setImageWidth(`${160 + progress * (window.innerWidth - 160)}px`);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isInView]); 
+  }, [isInView]);
 
   return (
-    <div id="styleMeetClaritySection" className="h-[100vh] bg-[#0a0a0e] text-white overflow-x-hidden relative">
+    <div
+      id="styleMeetClaritySection"
+      className="h-[100vh] bg-[#0a0a0e] text-white overflow-x-hidden relative"
+    >
       <div className="sticky top-0 min-h-[653px] h-auto flex flex-col items-center justify-center">
         <div className="mb-8">
           <span className="px-4 py-2 bg-gray-800 rounded-full text-sm flex items-center space-x-2">
