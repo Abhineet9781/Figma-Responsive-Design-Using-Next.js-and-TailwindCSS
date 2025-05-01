@@ -22,7 +22,7 @@ export default function Banner() {
                     <p>Find your perfect</p>
                     <p>eyewear look</p>
                 </div>
-                <div className={`${inter.className} text-white text-sm sm:text-base md:text-lg font-normal max-w-md md:max-w-xl self-end mt-6`}>
+                <div className={`${inter.className} text-white text-sm sm:text-sm md:text-sm font-normal max-w-md md:max-w-xl self-end mt-6 lg:pl-26 2xl:text-base`}>
                     <p>
                         We’re all about finding you that perfect pair. Experience the
                         difference a perfect pair makes. Let’s find yours together.
